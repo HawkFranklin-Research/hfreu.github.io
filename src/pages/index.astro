@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import ResearchToReach from "../components/ResearchToReach.astro";
+import Capabilities from "../components/Capabilities.astro";
+import VentureShowcase from "../components/VentureShowcase.astro";
+import SapakiSection from "../components/SapakiSection.astro";
+import CompanyNetwork from "../components/CompanyNetwork.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Footer from "../components/Footer.astro";
+
+const title = "HawkFranklin — Innovation & technology";
+const description =
+  "HawkFranklin is an innovation and technology company building original software, applied AI and connected products.";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "HawkFranklin OÜ",
+  alternateName: "HawkFranklin",
+  url: "https://hawkfranklin.eu",
+  logo: "https://hawkfranklin.eu/brand/hawkfranklin-emblem.png",
+  identifier: "17558108",
+  email: "contact@hawkfranklin.eu",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Ahtri tn 12",
+    postalCode: "15551",
+    addressLocality: "Tallinn",
+    addressCountry: "EE"
+  }
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <ResearchToReach />
+    <Capabilities />
+    <VentureShowcase />
+    <SapakiSection />
+    <CompanyNetwork />
+    <ContactCTA />
+  </main>
+  <Footer />
+  <div class="scroll-meter" aria-hidden="true"><span data-scroll-meter></span></div>
+  <script>
+    import "../scripts/motion";
+  </script>
+</BaseLayout>

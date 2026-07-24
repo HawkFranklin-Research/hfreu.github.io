@@ -1,0 +1,32 @@
+---
+const stages = [
+  { number: "01", title: "Question", place: "Explore", copy: "Start with a real problem that existing technology has not solved well enough." },
+  { number: "02", title: "Research", place: "Discover", copy: "Investigate the science, behaviour and technical possibility behind it." },
+  { number: "03", title: "Invent", place: "Create", copy: "Build an original approach instead of assembling another familiar product." },
+  { number: "04", title: "Engineer", place: "Make", copy: "Turn the idea into dependable software, intelligent systems or hardware." },
+  { number: "05", title: "Launch", place: "Use", copy: "Put it into the hands of people who can make something meaningful with it." }
+];
+---
+
+<section class="story section" id="story" aria-labelledby="story-title">
+  <div class="section-heading">
+    <p class="eyebrow"><span></span> How we think</p>
+    <h2 id="story-title">Difficult questions become <em>working technology.</em></h2>
+    <p>
+      HawkFranklin explores across software, AI, healthcare and autonomous systems—then turns promising
+      ideas into products people can actually use.
+    </p>
+  </div>
+
+  <div class="route" data-route>
+    <div class="route-line" aria-hidden="true"><span data-route-progress></span></div>
+    {stages.map((stage) => (
+      <article class="route-stage">
+        <div class="route-node" aria-hidden="true"><span></span></div>
+        <div class="route-meta"><span>{stage.number}</span><small>{stage.place}</small></div>
+        <h3>{stage.title}</h3>
+        <p>{stage.copy}</p>
+      </article>
+    ))}
+  </div>
+</section>

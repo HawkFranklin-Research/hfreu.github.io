@@ -1,0 +1,45 @@
+---
+const capabilities = [
+  {
+    number: "01",
+    title: "Original products",
+    copy: "We identify overlooked problems and create our own products, from the first technical experiment to a usable system.",
+    tags: ["Product invention", "Prototyping", "Venture building"]
+  },
+  {
+    number: "02",
+    title: "Software & AI",
+    copy: "Applied AI, private intelligence, SaaS platforms and custom digital systems engineered around real workflows.",
+    tags: ["Applied AI", "Custom software", "SaaS platforms"]
+  },
+  {
+    number: "03",
+    title: "Autonomous systems",
+    copy: "Connected hardware, drones and robotics where software, sensing and intelligent behaviour meet the physical world.",
+    tags: ["Drones", "Robotics", "Connected hardware"]
+  }
+];
+---
+
+<section class="capabilities section" id="capabilities" aria-labelledby="capabilities-title">
+  <div class="capabilities-intro">
+    <p class="eyebrow"><span></span> What we do</p>
+    <h2 id="capabilities-title">Research the unknown.<br /><em>Engineer the possible.</em></h2>
+  </div>
+
+  <div class="capability-list">
+    {capabilities.map((capability) => (
+      <article class="capability-card">
+        <div class="capability-top">
+          <span>{capability.number}</span>
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25 25 7M12 7h13v13" /></svg>
+        </div>
+        <h3>{capability.title}</h3>
+        <p>{capability.copy}</p>
+        <ul aria-label={`${capability.title} areas`}>
+          {capability.tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

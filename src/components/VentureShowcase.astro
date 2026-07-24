@@ -1,0 +1,57 @@
+---
+import { ventures } from "../data/ventures";
+---
+
+<section class="ventures" id="work" aria-labelledby="ventures-title" data-ventures>
+  <div class="ventures-pin" data-ventures-pin>
+    <div class="ventures-heading">
+      <div>
+        <p class="eyebrow"><span></span> Selected ventures</p>
+        <h2 id="ventures-title">A few things<br /><em>we are moving forward.</em></h2>
+      </div>
+      <p>Not a catalogue. A view into the range of problems the HawkFranklin network is prepared to take on.</p>
+    </div>
+
+    <div class="venture-track" data-venture-track>
+      {ventures.map((venture) => (
+        <article class={`venture-card venture-${venture.theme}`}>
+          <div class="venture-copy">
+            <div class="venture-meta">
+              <span>{venture.index}</span>
+              <small>{venture.label}</small>
+            </div>
+            <h3>{venture.name}</h3>
+            <p>{venture.description}</p>
+            <div class="venture-footer">
+              <span><i></i>{venture.status}</span>
+              <a href={venture.href} target="_blank" rel="noopener" aria-label={`Explore ${venture.name}`}>
+                Explore <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+          <div class="venture-visual">
+            <div class="visual-grid" aria-hidden="true"></div>
+            <div class="venture-image-wrap">
+              <img src={venture.image} alt={venture.imageAlt} loading="lazy" />
+            </div>
+            {venture.theme === "clinical" && (
+              <div class="product-signal clinical-signal" aria-hidden="true">
+                <span>Structured intake</span><span>Clinician workspace</span><span>Digital clinic</span>
+              </div>
+            )}
+            {venture.theme === "private" && (
+              <div class="product-signal private-signal" aria-hidden="true">
+                <span>ON DEVICE</span><strong>Local inference</strong><small>No cloud round-trip</small>
+              </div>
+            )}
+            {venture.theme === "cinema" && (
+              <div class="product-signal cinema-signal" aria-hidden="true">
+                <span>TRACK 01</span><strong>Autonomous orbit</strong><small>Raw footage stays local</small>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
