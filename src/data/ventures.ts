@@ -30,7 +30,7 @@ export const ventures: Venture[] = [
     description:
       "A useful AI assistant that runs on your phone, keeps local conversations on-device and remains available when the internet is not.",
     status: "Android · local inference",
-    href: "https://research.hawkfranklin.in/products/aura2.html",
+    href: "https://hawkfranklin.in/products/aura2.html",
     image: "/products/nimbo.png",
     imageAlt: "Nimbo app icon",
     theme: "private"
