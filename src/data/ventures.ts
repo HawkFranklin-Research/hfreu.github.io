@@ -25,14 +25,14 @@ export const ventures: Venture[] = [
   },
   {
     index: "02",
-    name: "Nimbo",
+    name: "AURA",
     label: "Private AI",
     description:
       "A useful AI assistant that runs on your phone, keeps local conversations on-device and remains available when the internet is not.",
     status: "Android · local inference",
-    href: "https://hawkfranklin.in/products/aura2.html",
-    image: "/products/nimbo.png",
-    imageAlt: "Nimbo app icon",
+    href: "https://hawkfranklin.in/products/aura.html",
+    image: "/products/aura.png",
+    imageAlt: "AURA app icon",
     theme: "private"
   },
   {
