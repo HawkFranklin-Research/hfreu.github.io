@@ -1,3 +1,7 @@
+---
+import { company } from "../data/company";
+---
+
 <section class="network section" id="network" aria-labelledby="network-title">
   <div class="network-heading">
     <p class="eyebrow"><span></span> The HawkFranklin network</p>
@@ -34,7 +38,12 @@
       <p>Tallinn, Estonia</p>
       <h3>HawkFranklin OÜ</h3>
       <p class="office-copy">Technology products, software and IT projects, European operations and selected distribution.</p>
-      <a href="#contact">Work with us <span aria-hidden="true">↗</span></a>
+      <div class="office-actions">
+        <a href="/#contact">Work with us <span aria-hidden="true">↗</span></a>
+        <a href={company.registryUrl} target="_blank" rel="noopener">
+          Official company record <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </article>
   </div>
 </section>

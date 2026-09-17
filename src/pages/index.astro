@@ -9,6 +9,7 @@ import SapakiSection from "../components/SapakiSection.astro";
 import CompanyNetwork from "../components/CompanyNetwork.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import Footer from "../components/Footer.astro";
+import { company } from "../data/company";
 
 const title = "HawkFranklin — Innovation & technology";
 const description =
@@ -17,18 +18,20 @@ const description =
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "HawkFranklin OÜ",
+  name: company.name,
   alternateName: "HawkFranklin",
-  url: "https://hawkfranklin.in",
-  logo: "https://hawkfranklin.in/brand/hawkfranklin-emblem.png",
-  identifier: "17558108",
-  email: "contact@hawkfranklin.in",
+  url: company.siteUrl,
+  logo: `${company.siteUrl}/brand/hawkfranklin-emblem.png`,
+  identifier: company.registryCode,
+  email: company.email,
+  telephone: company.phone,
+  sameAs: [company.registryUrl],
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Ahtri tn 12",
-    postalCode: "15551",
-    addressLocality: "Tallinn",
-    addressCountry: "EE"
+    streetAddress: company.streetAddress,
+    postalCode: company.postalCode,
+    addressLocality: company.city,
+    addressCountry: company.countryCode
   }
 };
 ---
@@ -47,6 +50,9 @@ const organizationSchema = {
   </main>
   <Footer />
   <div class="scroll-meter" aria-hidden="true"><span data-scroll-meter></span></div>
+  <script>
+    import "../scripts/shell";
+  </script>
   <script>
     import "../scripts/motion";
   </script>

@@ -1,21 +1,30 @@
+---
+import { company } from "../data/company";
+---
+
 <footer class="site-footer">
   <div class="footer-top">
-    <a class="footer-brand" href="#top" aria-label="Back to top">
+    <a class="footer-brand" href="/#top" aria-label="HawkFranklin homepage">
       <span class="footer-emblem"><img src="/brand/hawkfranklin-emblem.png" alt="" /></span>
       <span>HawkFranklin</span>
     </a>
     <p>Building what should exist next.</p>
-    <a href="#top">Back to top ↑</a>
+    <a href="/#top">Back to top ↑</a>
   </div>
   <div class="footer-bottom">
     <p>
-      HawkFranklin OÜ · Registry code 17558108<br />
-      Ahtri tn 12, 15551 Tallinn, Estonia
+      <strong>{company.name}</strong><br />
+      <a href={company.registryUrl} target="_blank" rel="noopener">Registry code {company.registryCode} ↗</a><br />
+      {company.streetAddress}, {company.postalCode} {company.city}, {company.country}<br />
+      <a href={company.phoneHref}>{company.phone}</a> · <a href={`mailto:${company.email}`}>{company.email}</a>
     </p>
     <p>
       HawkFranklin OÜ and HawkFranklin Research (OPC) Private Limited are affiliated legal entities
       operating within the HawkFranklin network.
     </p>
-    <p>© {new Date().getFullYear()} HawkFranklin OÜ</p>
+    <p class="footer-legal">
+      <a href="/privacy/">Privacy</a><br />
+      © {new Date().getFullYear()} {company.name}
+    </p>
   </div>
 </footer>

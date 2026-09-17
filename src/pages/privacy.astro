@@ -1,0 +1,141 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { company } from "../data/company";
+
+const title = "Privacy notice — HawkFranklin OÜ";
+const description =
+  "How HawkFranklin OÜ handles personal data received through its corporate website and business communications.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main id="main-content" class="legal-page">
+    <header class="legal-hero">
+      <p class="eyebrow"><span></span> Legal information</p>
+      <h1>Privacy notice</h1>
+      <p>
+        This notice explains how {company.name} handles personal data received through this corporate website
+        and through direct business communications.
+      </p>
+      <p>Last updated: 17 September 2026</p>
+    </header>
+
+    <div class="legal-layout">
+      <aside class="legal-company-card" aria-label="Data controller details">
+        <strong>{company.name}</strong><br />
+        Registry code {company.registryCode}
+        <address>
+          {company.streetAddress}<br />
+          {company.postalCode} {company.city}, {company.country}
+        </address>
+        <a href={`mailto:${company.email}`}>{company.email}</a><br />
+        <a href={company.phoneHref}>{company.phone}</a><br />
+        <a href={company.registryUrl} target="_blank" rel="noopener">Official company record ↗</a>
+      </aside>
+
+      <div class="legal-content">
+        <section>
+          <h2>1. Who is responsible for your data?</h2>
+          <p>
+            {company.name} is the data controller for personal data described in this notice. You can contact us
+            using the email, phone number or registered office address shown on this page.
+          </p>
+        </section>
+
+        <section>
+          <h2>2. What information do we receive?</h2>
+          <p>We may receive personal data when you contact us, including:</p>
+          <ul>
+            <li>your name, organisation, role and contact details;</li>
+            <li>the contents of your enquiry and subsequent correspondence;</li>
+            <li>information you choose to provide about a project, partnership or business requirement; and</li>
+            <li>basic technical request data processed when this website is delivered, such as IP address, browser information, requested page and time of access.</li>
+          </ul>
+          <p>Please avoid sending sensitive personal data unless it is necessary and we have agreed how it should be handled.</p>
+        </section>
+
+        <section>
+          <h2>3. Why do we process it?</h2>
+          <p>We process relevant information to:</p>
+          <ul>
+            <li>answer enquiries and communicate with prospective clients, partners and suppliers;</li>
+            <li>take steps requested before entering into a contract and manage business relationships;</li>
+            <li>operate, secure and improve the corporate website; and</li>
+            <li>meet legal, accounting and regulatory obligations.</li>
+          </ul>
+          <p>
+            Depending on the context, our legal basis is taking steps before or performing a contract, compliance
+            with a legal obligation, or our legitimate interest in operating and developing our business and responding to enquiries.
+          </p>
+        </section>
+
+        <section>
+          <h2>4. Website technology and cookies</h2>
+          <p>
+            This corporate website does not currently use an enquiry form, advertising trackers or analytics cookies.
+            Our hosting provider may process technical request data required to deliver and protect the website.
+            If our use of cookies or analytics changes, this notice and any required consent controls will be updated.
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Who may receive information?</h2>
+          <p>
+            Information may be handled by service providers supporting website hosting, email and business operations,
+            and by professional advisers or public authorities where reasonably necessary or legally required. We do not sell personal data.
+          </p>
+          <p>
+            Where a provider processes information outside the European Economic Area, we use the safeguards applicable
+            to that provider and processing arrangement.
+          </p>
+        </section>
+
+        <section>
+          <h2>6. How long do we keep it?</h2>
+          <p>
+            We retain enquiries and correspondence only for as long as reasonably necessary for the relevant relationship,
+            follow-up, dispute handling and legal obligations. Contractual, accounting or regulatory records may be retained
+            for the periods required by applicable law.
+          </p>
+        </section>
+
+        <section>
+          <h2>7. Your data-protection rights</h2>
+          <p>
+            Subject to applicable law, you may request access, correction, erasure, restriction or portability of your
+            personal data, and may object to certain processing. Where processing relies on consent, you may withdraw it.
+            Contact <a href={`mailto:${company.email}`}>{company.email}</a> to make a request.
+          </p>
+          <p>
+            You may also lodge a complaint with the
+            <a href="https://www.aki.ee/en" target="_blank" rel="noopener">Estonian Data Protection Inspectorate</a>
+            or another competent supervisory authority.
+          </p>
+        </section>
+
+        <section>
+          <h2>8. Other websites and product notices</h2>
+          <p>
+            Links may lead to products, affiliated companies or third-party websites with their own privacy notices.
+            Product-specific services may also provide additional notices describing their particular data processing.
+          </p>
+        </section>
+
+        <section>
+          <h2>9. Changes to this notice</h2>
+          <p>
+            We may update this notice when our website, services or legal obligations change. The current version and
+            update date will remain available on this page.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+  <div class="scroll-meter" aria-hidden="true"><span data-scroll-meter></span></div>
+  <script>
+    import "../scripts/shell";
+  </script>
+</BaseLayout>

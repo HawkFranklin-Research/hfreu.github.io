@@ -1403,6 +1403,25 @@ button:focus-visible {
   font-weight: 700;
 }
 
+.office-actions {
+  position: absolute;
+  right: clamp(1.5rem, 3vw, 3rem);
+  bottom: 2.2rem;
+  left: clamp(1.5rem, 3vw, 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.4rem;
+}
+
+.office-actions a {
+  display: inline-flex;
+  gap: 0.7rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
 .network-bridge {
   z-index: 2;
   align-self: center;
@@ -1482,6 +1501,73 @@ button:focus-visible {
   font-style: normal;
 }
 
+.company-contact-card {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.company-contact-card > div,
+.company-contact-card address {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--ivory-soft);
+  font-size: 0.76rem;
+  font-style: normal;
+  line-height: 1.7;
+}
+
+.company-contact-card > div:last-child {
+  grid-column: 1 / -1;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.company-contact-card span {
+  margin-bottom: 0.35rem;
+  color: var(--muted);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.company-contact-card strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.company-contact-card small {
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.company-contact-card a:not(.registry-link) {
+  color: var(--ivory);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.registry-link {
+  margin-top: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--blue-soft);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.registry-link i {
+  font-style: normal;
+}
+
 .contact-types {
   display: flex;
   flex-wrap: wrap;
@@ -1544,8 +1630,118 @@ button:focus-visible {
   margin: 0;
 }
 
+.footer-bottom a {
+  transition: color 180ms ease;
+}
+
+.footer-bottom a:hover {
+  color: var(--ivory);
+}
+
 .footer-bottom p:last-child {
   text-align: right;
+}
+
+/* Legal pages */
+
+.legal-page {
+  width: var(--page);
+  margin-inline: auto;
+  padding: clamp(10rem, 15vw, 13rem) 0 clamp(5rem, 9vw, 9rem);
+}
+
+.legal-hero {
+  max-width: 62rem;
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.legal-hero h1 {
+  margin: 1.4rem 0 1.5rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(4.5rem, 10vw, 9rem);
+  font-weight: 400;
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+}
+
+.legal-hero > p:not(.eyebrow) {
+  max-width: 58ch;
+  color: var(--muted);
+}
+
+.legal-hero > p:last-child {
+  margin-top: 1.2rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+}
+
+.legal-layout {
+  padding-top: clamp(3rem, 7vw, 6rem);
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(3rem, 8vw, 9rem);
+  align-items: start;
+}
+
+.legal-company-card {
+  position: sticky;
+  top: 7rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  color: var(--ivory-soft);
+  background: var(--panel);
+  font-size: 0.78rem;
+  line-height: 1.8;
+}
+
+.legal-company-card strong {
+  color: var(--ivory);
+  font-size: 1rem;
+}
+
+.legal-company-card address {
+  margin: 1rem 0;
+  font-style: normal;
+}
+
+.legal-company-card a {
+  color: var(--blue-soft);
+}
+
+.legal-content {
+  max-width: 52rem;
+}
+
+.legal-content section + section {
+  margin-top: 3.5rem;
+  padding-top: 3.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.legal-content h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+
+.legal-content p,
+.legal-content li {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.legal-content ul {
+  padding-left: 1.2rem;
+}
+
+.legal-content a {
+  color: var(--blue-soft);
+  text-decoration: underline;
+  text-decoration-color: rgba(125, 211, 252, 0.35);
+  text-underline-offset: 0.22em;
 }
 
 .scroll-meter {
@@ -2011,6 +2207,11 @@ button:focus-visible {
     left: 1.5rem;
   }
 
+  .office-actions {
+    right: 1.5rem;
+    left: 1.5rem;
+  }
+
   .contact {
     margin-bottom: 0.5rem;
     padding-top: 3rem;
@@ -2024,6 +2225,22 @@ button:focus-visible {
   .contact-email i {
     width: 2.5rem;
     height: 2.5rem;
+  }
+
+  .company-contact-card {
+    grid-template-columns: 1fr;
+  }
+
+  .company-contact-card > div:last-child {
+    grid-column: auto;
+  }
+
+  .legal-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .legal-company-card {
+    position: static;
   }
 
   .footer-top {

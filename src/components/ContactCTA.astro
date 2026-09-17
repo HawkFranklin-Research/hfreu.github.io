@@ -1,3 +1,7 @@
+---
+import { company } from "../data/company";
+---
+
 <section class="contact section" id="contact" aria-labelledby="contact-title">
   <div class="contact-orb" aria-hidden="true"></div>
   <div class="contact-copy">
@@ -9,10 +13,29 @@
     </p>
   </div>
   <div class="contact-action">
-    <a class="contact-email magnetic" href="mailto:contact@hawkfranklin.in?subject=HawkFranklin%20project%20inquiry">
-      <span>contact@hawkfranklin.in</span>
+    <a class="contact-email magnetic" href={`mailto:${company.email}?subject=HawkFranklin%20project%20inquiry`}>
+      <span>{company.email}</span>
       <i aria-hidden="true">↗</i>
     </a>
+    <div class="company-contact-card">
+      <div>
+        <span>Registered company</span>
+        <strong>{company.name}</strong>
+        <small>Registry code {company.registryCode}</small>
+      </div>
+      <address>
+        <span>Registered office</span>
+        {company.streetAddress}<br />
+        {company.postalCode} {company.city}, {company.country}
+      </address>
+      <div>
+        <span>Telephone</span>
+        <a href={company.phoneHref}>{company.phone}</a>
+        <a class="registry-link" href={company.registryUrl} target="_blank" rel="noopener">
+          Verify in the Estonian e-Business Register <i aria-hidden="true">↗</i>
+        </a>
+      </div>
+    </div>
     <div class="contact-types" aria-label="Inquiry categories">
       <span>Original products</span>
       <span>IT & software projects</span>
