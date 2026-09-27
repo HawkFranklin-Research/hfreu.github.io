@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import PortfolioChapter from "../components/PortfolioChapter.astro";
+import { chapters, networkChips } from "../data/portfolio";
+import "../styles/portfolio.css";
+
+const title = "Portfolio — HawkFranklin";
+const description =
+  "The ventures, research and platforms HawkFranklin is building — from clinical AI and on-device intelligence to robotics distribution.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main id="main-content">
+    <section class="p-hero">
+      <div class="p-hero-glow" aria-hidden="true"></div>
+      <div class="p-hero-inner">
+        <p class="eyebrow"><span></span> Portfolio</p>
+        <h1>Everything we are <em>building, right now.</em></h1>
+        <p class="p-hero-lede">
+          Seven ventures, one network. Scroll through the clinical AI in pilot, the research under peer review,
+          and the robots already competing on a field — each with the media to prove it is real.
+        </p>
+        <nav class="p-hero-rail" aria-label="Jump to venture">
+          {chapters.map((chapter) => (
+            <button type="button" data-rail-target={chapter.id}>
+              {chapter.index} · {chapter.name}
+            </button>
+          ))}
+        </nav>
+      </div>
+    </section>
+
+    <div class="p-chapters">
+      {chapters.map((chapter) => (
+        <PortfolioChapter chapter={chapter} total={chapters.length} />
+      ))}
+    </div>
+
+    <section class="p-network section" aria-labelledby="network-strip-title">
+      <p class="eyebrow"><span></span> Also in the network</p>
+      <h2 id="network-strip-title" style="font-size:clamp(2.2rem,4vw,3.4rem);font-weight:500;letter-spacing:-0.05em;margin-bottom:2rem;">
+        Beyond the flagships.
+      </h2>
+      <div class="p-network-grid">
+        {networkChips.map((chip) => (
+          <div class="p-network-card">
+            <div class="p-network-mark">
+              {chip.logo ? <img src={chip.logo} alt={`${chip.name} logo`} /> : <span>{chip.name.slice(0, 2).toUpperCase()}</span>}
+            </div>
+            <h3>{chip.name}</h3>
+            <p>{chip.blurb}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <ContactCTA />
+  </main>
+  <Footer />
+
+  <nav class="p-rail-nav" aria-label="Chapter navigation">
+    {chapters.map((chapter) => (
+      <button type="button" data-rail-target={chapter.id} data-label={chapter.name} aria-label={`Jump to ${chapter.name}`}></button>
+    ))}
+  </nav>
+
+  <div class="p-modal" data-video-modal>
+    <div class="p-modal-frame">
+      <button type="button" class="p-modal-close" data-modal-close>Close ✕</button>
+      <video playsinline controls></video>
+    </div>
+  </div>
+
+  <div class="scroll-meter" aria-hidden="true"><span data-scroll-meter></span></div>
+  <script>
+    import "../scripts/shell";
+  </script>
+  <script>
+    import "../scripts/portfolio";
+  </script>
+</BaseLayout>

@@ -1,0 +1,153 @@
+---
+import type { Chapter } from "../data/portfolio";
+
+type Props = { chapter: Chapter; total: number };
+const { chapter, total } = Astro.props;
+---
+
+<section
+  class="p-chapter"
+  id={chapter.id}
+  data-chapter
+  style={`--accent-a:${chapter.accentFrom}; --accent-b:${chapter.accentTo};`}
+>
+  <div class="p-chapter-wash" aria-hidden="true"></div>
+  <div class="p-chapter-inner">
+    <header class="p-chapter-head">
+      <p class="eyebrow"><span></span> {chapter.kicker}</p>
+      <div class="p-chapter-title-row">
+        <h2>{chapter.name}</h2>
+        <span class="p-chapter-index">{chapter.index}<i>/{total.toString().padStart(2, "0")}</i></span>
+      </div>
+      <p class="p-chapter-tagline">{chapter.tagline}</p>
+      <p class="p-chapter-desc">{chapter.description}</p>
+      <div class="p-chapter-foot">
+        <span><i></i>{chapter.status}</span>
+        {chapter.href && (
+          <a href={chapter.href} target="_blank" rel="noopener">
+            Explore <span aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+    </header>
+
+    <div class="p-plate">
+      <div class="p-bento">
+        {chapter.cards.map((card) => {
+          if (card.kind === "video") {
+            return (
+              <div class={`p-card p-card-${card.span} p-card-video`} data-video-card data-expand-src={card.expandSrc ?? card.src}>
+                <video class="p-video" data-random-video muted loop playsinline preload="metadata" src={card.src}></video>
+                <div class="p-video-overlay">
+                  {card.label && <span class="p-video-label">{card.label}</span>}
+                  <span class="p-video-expand">
+                    <i class="p-play-glyph" aria-hidden="true"></i>
+                    {card.caption ?? "Tap to expand"}
+                  </span>
+                </div>
+              </div>
+            );
+          }
+          if (card.kind === "image") {
+            return (
+              <figure class={`p-card p-card-${card.span} p-card-image`}>
+                <img src={card.src} alt={card.alt} loading="lazy" />
+                {card.caption && <figcaption>{card.caption}</figcaption>}
+              </figure>
+            );
+          }
+          if (card.kind === "strip") {
+            return (
+              <div class={`p-card p-card-${card.span} p-card-strip`}>
+                {card.caption && <p class="p-strip-caption">{card.caption}</p>}
+                <div class="p-strip-row">
+                  {card.images.map((img) => (
+                    <img src={img.src} alt={img.alt} loading="lazy" />
+                  ))}
+                </div>
+              </div>
+            );
+          }
+          if (card.kind === "carousel") {
+            return (
+              <div class={`p-card p-card-${card.span} p-card-carousel`} data-carousel>
+                {card.images.map((img, i) => (
+                  <figure class="p-carousel-slide" data-slide style={i === 0 ? "opacity:1" : "opacity:0"}>
+                    <img src={img.src} alt={img.alt} loading="lazy" />
+                    <figcaption>{img.caption}</figcaption>
+                  </figure>
+                ))}
+                <div class="p-carousel-dots" aria-hidden="true">
+                  {card.images.map(() => (
+                    <span></span>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+          if (card.kind === "stat") {
+            return (
+              <div class={`p-card p-card-${card.span} p-card-stat`}>
+                {card.stats.map((stat) => (
+                  <div class="p-stat">
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+            );
+          }
+          if (card.kind === "quote") {
+            return (
+              <blockquote class={`p-card p-card-${card.span} p-card-quote`}>
+                {card.lines.map((line) => (
+                  <p>{line}</p>
+                ))}
+                {card.attribution && <cite>{card.attribution}</cite>}
+              </blockquote>
+            );
+          }
+          if (card.kind === "copy") {
+            return (
+              <div class={`p-card p-card-${card.span} p-card-copy`}>
+                {card.heading && <h3>{card.heading}</h3>}
+                <p>{card.body}</p>
+                {card.bullets && (
+                  <ul>
+                    {card.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          }
+          if (card.kind === "ticker") {
+            return (
+              <div class={`p-card p-card-${card.span} p-card-ticker`} data-ticker>
+                <div class="p-ticker-head">
+                  <span class="p-ticker-dot"></span> Live reasoning feed
+                </div>
+                {card.verdicts.map((v, i) => (
+                  <div class={`p-ticker-row p-tone-${v.tone}`} data-ticker-row style={i === 0 ? "opacity:1" : "opacity:0.28"}>
+                    <span class="p-ticker-claim">{v.label}</span>
+                    <span class="p-ticker-verdict">{v.tone}</span>
+                    <span class="p-ticker-confidence">{v.confidence}</span>
+                  </div>
+                ))}
+              </div>
+            );
+          }
+          if (card.kind === "mark") {
+            return (
+              <div class={`p-card p-card-${card.span} p-card-mark`}>
+                <img src={card.src} alt={card.alt} loading="lazy" />
+              </div>
+            );
+          }
+          return null;
+        })}
+      </div>
+    </div>
+  </div>
+</section>
