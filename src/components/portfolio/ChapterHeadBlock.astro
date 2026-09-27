@@ -1,0 +1,24 @@
+---
+import type { ChapterHead } from "../../data/portfolio";
+
+type Props = { head: ChapterHead; total: number };
+const { head, total } = Astro.props;
+---
+
+<header class="p-chapter-head">
+  <p class="eyebrow"><span></span> {head.kicker}</p>
+  <div class="p-chapter-title-row">
+    <h2>{head.name}</h2>
+    <span class="p-chapter-index">{head.index}<i>/{total.toString().padStart(2, "0")}</i></span>
+  </div>
+  <p class="p-chapter-tagline">{head.tagline}</p>
+  <p class="p-chapter-desc">{head.description}</p>
+  <div class="p-chapter-foot">
+    <span><i></i>{head.status}</span>
+    {head.href && (
+      <a href={head.href} target="_blank" rel="noopener">
+        Explore <span aria-hidden="true">↗</span>
+      </a>
+    )}
+  </div>
+</header>

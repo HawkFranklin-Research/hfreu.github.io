@@ -1,0 +1,54 @@
+---
+import ChapterHeadBlock from "./ChapterHeadBlock.astro";
+import { oncogemma } from "../../data/portfolio";
+
+const { head, video, mark, diagnosisLines, quote } = oncogemma;
+
+type Props = { total: number };
+const { total } = Astro.props;
+---
+
+<section
+  class="p-chapter"
+  id={head.id}
+  data-chapter
+  style={`--accent-a:${head.accentFrom}; --accent-b:${head.accentTo};`}
+>
+  <div class="p-chapter-wash" aria-hidden="true"></div>
+  <div class="p-chapter-inner">
+    <ChapterHeadBlock head={head} total={total} />
+
+    <div class="p-plate">
+      <div class="p-wide-video p-reveal" data-video-card data-expand-src={video.src} style={`--wide-aspect:${video.aspect};`}>
+        <video class="p-video" data-random-video muted loop playsinline preload="metadata" src={video.src}></video>
+        <div class="p-video-overlay">
+          <span class="p-video-label">{video.label}</span>
+          <span class="p-video-expand">
+            <i class="p-play-glyph" aria-hidden="true"></i>
+            Tap to expand
+          </span>
+        </div>
+      </div>
+
+      <div class="p-onco-row">
+        <div class="p-diagnosis-panel p-reveal" data-cycler>
+          <div class="p-diagnosis-head">
+            <img src={mark} alt="OncoGemma logo" />
+            <span><i class="p-ticker-dot"></i> OncoLLM Assistant — live</span>
+          </div>
+          <div class="p-diagnosis-lines">
+            {diagnosisLines.map((line, i) => (
+              <p data-cycler-item style={i === 0 ? "opacity:1" : "opacity:0"}>{line}</p>
+            ))}
+          </div>
+        </div>
+
+        <blockquote class="p-quote-panel p-reveal">
+          {quote.map((line) => (
+            <p>{line}</p>
+          ))}
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>

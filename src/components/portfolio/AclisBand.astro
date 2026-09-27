@@ -1,0 +1,46 @@
+---
+import { aclisBand } from "../../data/portfolio";
+
+const { id, kicker, name, tagline, description, pillars, nodes } = aclisBand;
+
+const nodePositions = [
+  { top: 8, left: 50 },
+  { top: 26, left: 88 },
+  { top: 74, left: 88 },
+  { top: 92, left: 50 },
+  { top: 74, left: 12 },
+  { top: 26, left: 12 }
+];
+---
+
+<section class="p-band" id={id} data-chapter aria-labelledby="aclis-band-title" style="--accent-a:#eab308; --accent-b:#0ea5e9;">
+  <div class="p-band-inner">
+    <div class="p-band-copy p-reveal">
+      <p class="eyebrow"><span></span> {kicker}</p>
+      <h3 id="aclis-band-title">{tagline}</h3>
+      <p>{description}</p>
+      <ul class="p-band-pillars">
+        {pillars.map((pillar) => (
+          <li>
+            <strong>{pillar.title}</strong>
+            <span>{pillar.body}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="p-orbit p-reveal" aria-hidden="true">
+      <svg class="p-orbit-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        {nodePositions.map((pos) => (
+          <line x1="50" y1="50" x2={pos.left} y2={pos.top} />
+        ))}
+      </svg>
+      <div class="p-orbit-core"><span>ACLIS</span></div>
+      {nodes.map((label, i) => (
+        <div class="p-orbit-node" style={`top:${nodePositions[i].top}%; left:${nodePositions[i].left}%;`}>
+          {label}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

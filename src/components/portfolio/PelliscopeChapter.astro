@@ -1,0 +1,95 @@
+---
+import ChapterHeadBlock from "./ChapterHeadBlock.astro";
+import { pelliscope } from "../../data/portfolio";
+
+const { head, video, headlineStats, throughput, aucCompare, aucFootnote, modelSees, flow } = pelliscope;
+const throughputPct = (Number(throughput.after) / 10) * 100;
+const throughputBasePct = (Number(throughput.before) / 10) * 100;
+
+type Props = { total: number };
+const { total } = Astro.props;
+---
+
+<section
+  class="p-chapter"
+  id={head.id}
+  data-chapter
+  style={`--accent-a:${head.accentFrom}; --accent-b:${head.accentTo};`}
+>
+  <div class="p-chapter-wash" aria-hidden="true"></div>
+  <div class="p-chapter-inner">
+    <ChapterHeadBlock head={head} total={total} />
+
+    <div class="p-plate">
+      <div class="p-phone-row">
+        <div class="p-phone-stats p-reveal">
+          <div class="p-stat-big-row">
+            {headlineStats.map((stat) => (
+              <div class="p-stat-big">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="p-throughput">
+            <div class="p-throughput-row">
+              <span>{throughput.beforeLabel}</span>
+              <strong>{throughput.before} {throughput.unit}</strong>
+            </div>
+            <div class="p-throughput-bar"><div class="p-throughput-fill p-throughput-fill-base" style={`width:${throughputBasePct}%`}></div></div>
+            <div class="p-throughput-row p-throughput-row-active">
+              <span>{throughput.afterLabel}</span>
+              <strong>{throughput.after} {throughput.unit}</strong>
+            </div>
+            <div class="p-throughput-bar"><div class="p-throughput-fill" style={`width:${throughputPct}%`}></div></div>
+          </div>
+
+          <div class="p-auc-compare">
+            <p class="p-auc-heading">Zero-shot AUC, dermatology</p>
+            {aucCompare.map((row) => (
+              <div class={`p-auc-row ${row.highlight ? "is-highlight" : ""}`}>
+                <span>{row.name}</span>
+                <div class="p-auc-track"><div class="p-auc-fill" style={`width:${row.value * 100}%`}></div></div>
+                <strong>{row.value.toFixed(2)}</strong>
+              </div>
+            ))}
+            <p class="p-auc-footnote">{aucFootnote}</p>
+          </div>
+
+          <div class="p-model-sees">
+            <p>What the model sees</p>
+            <div class="p-model-sees-row">
+              {modelSees.map((img) => (
+                <img src={img.src} alt={img.alt} loading="lazy" />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="p-phone-cell">
+          <div class="p-phone-video p-reveal" data-video-card data-expand-src={video.expandSrc} style={`--phone-aspect:${video.aspect};`}>
+            <video class="p-video" data-random-video muted loop playsinline preload="metadata" src={video.src}></video>
+            <div class="p-video-overlay">
+              <span class="p-video-label">{video.label}</span>
+              <span class="p-video-expand">
+                <i class="p-play-glyph" aria-hidden="true"></i>
+                Full walkthrough
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-flow-strip p-reveal">
+        {flow.map((step, i) => (
+          <div class="p-flow-step">
+            <span class="p-flow-num">{i + 1}</span>
+            <img src={step.src} alt={step.alt} loading="lazy" />
+            <p>{step.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

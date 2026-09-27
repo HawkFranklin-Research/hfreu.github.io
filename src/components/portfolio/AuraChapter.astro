@@ -1,0 +1,59 @@
+---
+import ChapterHeadBlock from "./ChapterHeadBlock.astro";
+import { aura } from "../../data/portfolio";
+
+const { head, video, bullets, copy, mark, shots } = aura;
+
+type Props = { total: number };
+const { total } = Astro.props;
+---
+
+<section
+  class="p-chapter"
+  id={head.id}
+  data-chapter
+  style={`--accent-a:${head.accentFrom}; --accent-b:${head.accentTo};`}
+>
+  <div class="p-chapter-wash" aria-hidden="true"></div>
+  <div class="p-chapter-inner">
+    <ChapterHeadBlock head={head} total={total} />
+
+    <div class="p-plate">
+      <div class="p-phone-row">
+        <div class="p-phone-stats p-reveal">
+          <div class="p-card-mark-inline">
+            <img src={mark} alt="AURA logo" />
+          </div>
+          <p class="p-lead-copy">{copy}</p>
+          <ul class="p-pill-list">
+            {bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="p-phone-cell">
+          <div class="p-phone-video p-reveal" data-video-card data-expand-src={video.src} style={`--phone-aspect:${video.aspect};`}>
+            <video class="p-video" data-random-video muted loop playsinline preload="metadata" src={video.src}></video>
+            <div class="p-video-overlay">
+              <span class="p-video-label">{video.label}</span>
+              <span class="p-video-expand">
+                <i class="p-play-glyph" aria-hidden="true"></i>
+                Tap to expand
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-flow-strip p-reveal">
+        {shots.map((shot) => (
+          <div class="p-flow-step p-flow-step-plain">
+            <img src={shot.src} alt={shot.alt} loading="lazy" />
+            <p>{shot.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

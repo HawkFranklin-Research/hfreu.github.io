@@ -1,12 +1,12 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ---- Card reveal on scroll ---- */
+/* ---- Reveal on scroll ---- */
 
-const cards = document.querySelectorAll<HTMLElement>(".p-card");
+const revealTargets = document.querySelectorAll<HTMLElement>(".p-reveal");
 if (reduceMotion) {
-  cards.forEach((card) => card.classList.add("is-visible"));
+  revealTargets.forEach((el) => el.classList.add("is-visible"));
 } else {
-  const cardObserver = new IntersectionObserver(
+  const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -15,14 +15,14 @@ if (reduceMotion) {
             el.style.transition = "opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1)";
             el.style.opacity = "1";
             el.style.transform = "translateY(0)";
-          }, (i % 5) * 90);
-          cardObserver.unobserve(el);
+          }, (i % 4) * 90);
+          revealObserver.unobserve(el);
         }
       });
     },
-    { threshold: 0.2, rootMargin: "0px 0px -60px 0px" }
+    { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
   );
-  cards.forEach((card) => cardObserver.observe(card));
+  revealTargets.forEach((el) => revealObserver.observe(el));
 }
 
 /* ---- Chapter accent wash + rail nav active state ---- */
@@ -150,59 +150,24 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeModal();
 });
 
-/* ---- Carousel auto-advance ---- */
+/* ---- Generic cycler: OncoGemma diagnosis lines, ProbX demo scenarios ---- */
 
-document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carousel) => {
-  const slides = Array.from(carousel.querySelectorAll<HTMLElement>("[data-slide]"));
-  const dots = Array.from(carousel.querySelectorAll<HTMLElement>(".p-carousel-dots span"));
-  if (slides.length < 2) return;
-  let active = 0;
-  dots[0]?.classList.add("is-active");
-  let interval: number | undefined;
-
-  const advance = () => {
-    slides[active].style.opacity = "0";
-    active = (active + 1) % slides.length;
-    slides[active].style.opacity = "1";
-    dots.forEach((dot, i) => dot.classList.toggle("is-active", i === active));
-  };
-
-  const start = () => {
-    if (reduceMotion || interval) return;
-    interval = window.setInterval(advance, 2800);
-  };
-  const stop = () => {
-    if (interval) window.clearInterval(interval);
-    interval = undefined;
-  };
-
-  const visibility = new IntersectionObserver(
-    (entries) => entries.forEach((entry) => (entry.isIntersecting ? start() : stop())),
-    { threshold: 0.4 }
-  );
-  visibility.observe(carousel);
-  carousel.addEventListener("pointerenter", stop);
-  carousel.addEventListener("pointerleave", start);
-});
-
-/* ---- ProbX ticker cycle ---- */
-
-document.querySelectorAll<HTMLElement>("[data-ticker]").forEach((ticker) => {
-  const rows = Array.from(ticker.querySelectorAll<HTMLElement>("[data-ticker-row]"));
-  if (rows.length < 2 || reduceMotion) return;
+document.querySelectorAll<HTMLElement>("[data-cycler]").forEach((cycler) => {
+  const items = Array.from(cycler.querySelectorAll<HTMLElement>("[data-cycler-item]"));
+  if (items.length < 2 || reduceMotion) return;
   let active = 0;
   let interval: number | undefined;
 
   const advance = () => {
-    rows[active].style.opacity = "0.28";
-    active = (active + 1) % rows.length;
-    rows[active].style.opacity = "1";
+    items[active].style.opacity = "0";
+    active = (active + 1) % items.length;
+    items[active].style.opacity = "1";
   };
 
   const visibility = new IntersectionObserver(
     (entries) =>
       entries.forEach((entry) => {
-        if (entry.isIntersecting && !interval) interval = window.setInterval(advance, 2200);
+        if (entry.isIntersecting && !interval) interval = window.setInterval(advance, 3200);
         else if (!entry.isIntersecting && interval) {
           window.clearInterval(interval);
           interval = undefined;
@@ -210,5 +175,5 @@ document.querySelectorAll<HTMLElement>("[data-ticker]").forEach((ticker) => {
       }),
     { threshold: 0.4 }
   );
-  visibility.observe(ticker);
+  visibility.observe(cycler);
 });

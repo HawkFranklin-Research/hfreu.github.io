@@ -1,0 +1,56 @@
+---
+import ChapterHeadBlock from "./ChapterHeadBlock.astro";
+import { probx } from "../../data/portfolio";
+
+const { head, mark, demoClaims, bullets } = probx;
+
+type Props = { total: number };
+const { total } = Astro.props;
+---
+
+<section
+  class="p-chapter"
+  id={head.id}
+  data-chapter
+  style={`--accent-a:${head.accentFrom}; --accent-b:${head.accentTo};`}
+>
+  <div class="p-chapter-wash" aria-hidden="true"></div>
+  <div class="p-chapter-inner">
+    <ChapterHeadBlock head={head} total={total} />
+
+    <div class="p-plate">
+      <div class="p-probx-row">
+        <div class="p-probx-demo p-reveal" data-cycler>
+          <div class="p-probx-browser">
+            <span class="p-probx-dot"></span><span class="p-probx-dot"></span><span class="p-probx-dot"></span>
+            <span class="p-probx-chrome-url">probx.news/check</span>
+          </div>
+          <div class="p-probx-stage">
+            {demoClaims.map((item, i) => (
+              <div class="p-probx-item" data-cycler-item style={i === 0 ? "opacity:1" : "opacity:0"}>
+                <p class="p-probx-url">{item.url}</p>
+                <p class="p-probx-claim">{item.claim}</p>
+                <div class="p-probx-verdict-row">
+                  <span class={`p-probx-badge p-tone-${item.tone}`}>{item.tone}</span>
+                  <span class="p-probx-confidence">{item.confidence} confidence</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="p-probx-side p-reveal">
+          <div class="p-card-mark-inline">
+            <img src={mark} alt="ProbX News logo" />
+          </div>
+          <p class="p-lead-copy">Drop in a news link or image, get an instant AI fact-check verdict with sourced, cited evidence.</p>
+          <ul class="p-pill-list">
+            {bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

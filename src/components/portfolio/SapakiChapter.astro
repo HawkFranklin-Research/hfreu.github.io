@@ -1,0 +1,55 @@
+---
+import ChapterHeadBlock from "./ChapterHeadBlock.astro";
+import { sapaki } from "../../data/portfolio";
+
+const { head, reels, photos, tags } = sapaki;
+
+type Props = { total: number };
+const { total } = Astro.props;
+---
+
+<section
+  class="p-chapter"
+  id={head.id}
+  data-chapter
+  style={`--accent-a:${head.accentFrom}; --accent-b:${head.accentTo};`}
+>
+  <div class="p-chapter-wash" aria-hidden="true"></div>
+  <div class="p-chapter-inner">
+    <ChapterHeadBlock head={head} total={total} />
+
+    <div class="p-plate p-plate-paper">
+      <div class="p-deck-row">
+        <div class="p-deck-copy p-reveal">
+          <p class="p-deck-eyebrow">01 · The signal</p>
+          <h3 class="p-deck-headline">
+            Robotics is leaving the lab.<br />
+            <em>Sapaki gets it to the door.</em>
+          </h3>
+          <p class="p-deck-desc">{head.description}</p>
+          <div class="p-deck-tags">
+            {tags.map((tag) => (
+              <span>{tag}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class="p-deck-reels">
+          {reels.map((reel, i) => (
+            <div class="p-deck-reel p-reveal" data-video-card data-expand-src={reel.src} style={`--reel-aspect:${reel.aspect};`}>
+              <video class="p-video" data-random-video muted loop playsinline preload="metadata" src={reel.src}></video>
+              <span class="p-deck-reel-tag">{reel.tag}</span>
+              <span class="p-deck-reel-caption">{reel.caption}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="p-deck-photos p-reveal">
+        {photos.map((photo) => (
+          <img src={photo.src} alt={photo.alt} loading="lazy" />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

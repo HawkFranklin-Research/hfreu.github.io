@@ -1,0 +1,46 @@
+---
+import ChapterHeadBlock from "./ChapterHeadBlock.astro";
+import { research } from "../../data/portfolio";
+
+const { head, diagram, stats, bullets } = research;
+
+type Props = { total: number };
+const { total } = Astro.props;
+---
+
+<section
+  class="p-chapter"
+  id={head.id}
+  data-chapter
+  style={`--accent-a:${head.accentFrom}; --accent-b:${head.accentTo};`}
+>
+  <div class="p-chapter-wash" aria-hidden="true"></div>
+  <div class="p-chapter-inner">
+    <ChapterHeadBlock head={head} total={total} />
+
+    <div class="p-plate">
+      <div class="p-signal-row">
+        <div class="p-signal-stats p-reveal">
+          <div class="p-stat-big-row p-stat-big-row-vert">
+            {stats.map((stat) => (
+              <div class="p-stat-big">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
+          </div>
+          <ul class="p-pill-list">
+            {bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+
+        <figure class="p-signal-diagram p-reveal">
+          <img src={diagram} alt="ML Copilot Agent unified pipeline diagram" loading="lazy" />
+          <figcaption>Natural language → sandboxed agent → analysis → clinical report</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

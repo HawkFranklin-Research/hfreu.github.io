@@ -3,13 +3,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ContactCTA from "../components/ContactCTA.astro";
-import PortfolioChapter from "../components/PortfolioChapter.astro";
-import { chapters, networkChips } from "../data/portfolio";
+import PelliscopeChapter from "../components/portfolio/PelliscopeChapter.astro";
+import AclisBand from "../components/portfolio/AclisBand.astro";
+import OncoGemmaChapter from "../components/portfolio/OncoGemmaChapter.astro";
+import AuraChapter from "../components/portfolio/AuraChapter.astro";
+import ResearchChapter from "../components/portfolio/ResearchChapter.astro";
+import ProbxChapter from "../components/portfolio/ProbxChapter.astro";
+import SapakiChapter from "../components/portfolio/SapakiChapter.astro";
+import { networkChips } from "../data/portfolio";
 import "../styles/portfolio.css";
 
 const title = "Portfolio — HawkFranklin";
 const description =
   "The ventures, research and platforms HawkFranklin is building — from clinical AI and on-device intelligence to robotics distribution.";
+
+const totalChapters = 6;
+
+const railStops = [
+  { id: "pelliscope", label: "01 · PelliScope" },
+  { id: "aclis", label: "· ACLIS" },
+  { id: "oncogemma", label: "02 · OncoGemma" },
+  { id: "aura", label: "03 · AURA" },
+  { id: "research", label: "04 · ML Copilot" },
+  { id: "probx", label: "05 · ProbX News" },
+  { id: "sapaki", label: "06 · Sapaki" }
+];
 ---
 
 <BaseLayout title={title} description={description}>
@@ -21,23 +39,25 @@ const description =
         <p class="eyebrow"><span></span> Portfolio</p>
         <h1>Everything we are <em>building, right now.</em></h1>
         <p class="p-hero-lede">
-          Seven ventures, one network. Scroll through the clinical AI in pilot, the research under peer review,
-          and the robots already competing on a field — each with the media to prove it is real.
+          Six ventures, one platform layer, one network. Scroll through the clinical AI in pilot, the research
+          under peer review, and the robots already competing on a field — each with the media to prove it is real.
         </p>
         <nav class="p-hero-rail" aria-label="Jump to venture">
-          {chapters.map((chapter) => (
-            <button type="button" data-rail-target={chapter.id}>
-              {chapter.index} · {chapter.name}
-            </button>
+          {railStops.map((stop) => (
+            <button type="button" data-rail-target={stop.id}>{stop.label}</button>
           ))}
         </nav>
       </div>
     </section>
 
     <div class="p-chapters">
-      {chapters.map((chapter) => (
-        <PortfolioChapter chapter={chapter} total={chapters.length} />
-      ))}
+      <PelliscopeChapter total={totalChapters} />
+      <AclisBand />
+      <OncoGemmaChapter total={totalChapters} />
+      <AuraChapter total={totalChapters} />
+      <ResearchChapter total={totalChapters} />
+      <ProbxChapter total={totalChapters} />
+      <SapakiChapter total={totalChapters} />
     </div>
 
     <section class="p-network section" aria-labelledby="network-strip-title">
@@ -46,15 +66,19 @@ const description =
         Beyond the flagships.
       </h2>
       <div class="p-network-grid">
-        {networkChips.map((chip) => (
-          <div class="p-network-card">
-            <div class="p-network-mark">
-              {chip.logo ? <img src={chip.logo} alt={`${chip.name} logo`} /> : <span>{chip.name.slice(0, 2).toUpperCase()}</span>}
-            </div>
-            <h3>{chip.name}</h3>
-            <p>{chip.blurb}</p>
-          </div>
-        ))}
+        {networkChips.map((chip) => {
+          const Tag = chip.href ? "a" : "div";
+          return (
+            <Tag class="p-network-card" href={chip.href} target={chip.href ? "_blank" : undefined} rel={chip.href ? "noopener" : undefined}>
+              <div class="p-network-mark">
+                {chip.logo ? <img src={chip.logo} alt={`${chip.name} logo`} /> : <span>{chip.name.slice(0, 2).toUpperCase()}</span>}
+              </div>
+              <h3>{chip.name}</h3>
+              <p>{chip.blurb}</p>
+              {chip.href && <span class="p-network-link">Visit ↗</span>}
+            </Tag>
+          );
+        })}
       </div>
     </section>
 
@@ -63,8 +87,8 @@ const description =
   <Footer />
 
   <nav class="p-rail-nav" aria-label="Chapter navigation">
-    {chapters.map((chapter) => (
-      <button type="button" data-rail-target={chapter.id} data-label={chapter.name} aria-label={`Jump to ${chapter.name}`}></button>
+    {railStops.map((stop) => (
+      <button type="button" data-rail-target={stop.id} data-label={stop.label.replace(/^\S+\s·\s/, "")} aria-label={`Jump to ${stop.label}`}></button>
     ))}
   </nav>
 
