@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>AURA privacy policy — HawkFranklin</title>
+<style>body{margin:0;background:#f7f6f2;color:#17211e;font:17px/1.65 system-ui,sans-serif}main{max-width:800px;margin:auto;padding:40px 24px 80px}h1,h2{line-height:1.2}h2{margin-top:2em}a{color:#07664f;overflow-wrap:anywhere}li{margin:.6em 0}</style>
+</head><body><main>
+<h1>Privacy Policy — AURA</h1>
+<p>Effective date: October 20, 2026 (for the update adding optional OpenRouter chat).</p>
+<p>AURA is developed by HawkFranklin Research. It offers downloaded, on-device AI models and optional online text chat using the user&#x27;s own OpenRouter connection. These modes have different data flows.</p>
+<h2>Downloaded models and local chat</h2>
+<p>Downloaded models perform inference on your device. AURA does not upload local chat conversations to OpenRouter. No OpenRouter account is required to download public models or use local chat. Model downloads and optional Hugging Face access requests are sent directly to the model host. That host receives normal network information such as your IP address and requested file.</p>
+<h2>Optional OpenRouter chat</h2>
+<p>Online chat is enabled only after you choose to connect your OpenRouter account. Authorization takes place in your browser on OpenRouter&#x27;s website. AURA receives an API key for your account, not your OpenRouter password.</p>
+<p>The browser authorization callback is hosted on HawkFranklin&#x27;s website using GitHub Pages. The hosting provider receives the callback request, which can include a short-lived authorization code and state. The API key is exchanged only by AURA on your phone and is not sent to that website. The callback page removes query values from the visible browser history and does not deliberately log them or include third-party scripts. Hosting-provider request processing still applies; GitHub states that it logs visitor IP addresses for security. See <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" rel="noopener noreferrer">GitHub Pages data collection</a> and the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">GitHub Privacy Statement</a>.</p>
+<p>When you send an online message, AURA sends that message and the relevant user/assistant context from the current online conversation directly over HTTPS to OpenRouter, which routes it to an inference provider. Reasoning details returned by a model may be saved locally and returned as conversation context. Other saved conversations are not automatically uploaded. This release supports online text chat; existing local image/audio tasks remain local.</p>
+<p>AURA requests only free models and requires OpenRouter&#x27;s zero-data-retention routing and data-collection restrictions. If no eligible endpoint is available, the request fails; AURA does not silently select a paid model or relax those restrictions. These controls rely on OpenRouter&#x27;s classification and enforcement of provider policies. AURA cannot independently audit or guarantee a provider&#x27;s conduct. Zero retention routing is not a claim that no data is transmitted, no request metadata exists, or no transient in-memory caching occurs.</p>
+<p>OpenRouter describes prompt/response storage as opt-in through account controls. If you enable its content logging or product-use options, those settings apply. OpenRouter retains request metadata, such as token counts and latency. Its privacy policy describes account, network, security, legal and other processing. Underlying providers have their own terms and policies. Review these before connecting:</p>
+<ul>
+<li><a href="https://openrouter.ai/privacy" rel="noopener noreferrer">OpenRouter privacy policy</a></li>
+<li><a href="https://openrouter.ai/docs/guides/privacy/data-collection" rel="noopener noreferrer">OpenRouter data collection</a></li>
+<li><a href="https://openrouter.ai/docs/guides/features/zdr" rel="noopener noreferrer">Zero Data Retention routing</a></li>
+<li><a href="https://openrouter.ai/providers" rel="noopener noreferrer">Provider policies</a></li>
+<li><a href="https://openrouter.ai/terms" rel="noopener noreferrer">OpenRouter terms</a></li>
+</ul>
+<p>HawkFranklin Research operates AURA independently. We do not operate OpenRouter or the inference providers, control their policies, or claim their endorsement. AURA does not relay chat traffic through a HawkFranklin chat server.</p>
+<h2>Local storage, deletion, and access</h2>
+<p>Chat history, including partial responses, is stored in AURA&#x27;s app storage. OpenRouter credentials and pending sign-in secrets are encrypted with an Android Keystore key and stored in a directory excluded from Android backup. Current backup rules also exclude chat history, attachments and Hugging Face credential storage from cloud backup and device transfer. Earlier app versions may have used different backup rules; this update does not erase earlier backups.</p>
+<p>Deleting a chat removes its local saved copy. It does not submit a deletion request to OpenRouter, its providers, or a previous backup service. Disconnecting OpenRouter removes AURA&#x27;s locally stored connection; it does not revoke the remote API key or close your OpenRouter account. Manage or revoke access in OpenRouter&#x27;s account settings. Clearing app data or uninstalling removes app-owned local data, subject to Android&#x27;s behavior and any earlier backups.</p>
+<h2>Permissions</h2>
+<ul>
+<li>Internet: model downloads, optional authentication/catalog requests and online chat.</li>
+<li>Camera/photos: local image input, when you choose that feature.</li>
+<li>Microphone: local audio input and device speech recognition features.</li>
+<li>Notifications/foreground service: model download progress and completion.</li>
+</ul>
+<p>Device dictation uses Android&#x27;s configured speech recognition service. Its processing, network use and policies depend on the service installed on your device; AURA does not guarantee every dictation service is offline. Online text chat does not automatically upload camera images or microphone recordings.</p>
+<h2>Analytics and advertising</h2>
+<p>AURA is ad-free. Firebase Analytics code is present as a dependency, but analytics collection is explicitly deactivated in this update&#x27;s application manifest. The OpenRouter integration does not send chat content or credentials to analytics. OpenRouter and model hosts process network requests under their own policies.</p>
+<h2>Children and changes</h2>
+<p>AURA is not directed to children under 13. Online providers may impose additional age and account requirements. We will update this policy when data handling changes, including the effective date.</p>
+<h2>Contact</h2>
+<p>Contact HawkFranklin Research through https://hawkfranklin.eu for AURA privacy questions. Contact OpenRouter or the applicable provider for their account/data requests; AURA does not administer those services.</p>
+<p><a href="/">HawkFranklin home</a> · <a href="/products/aura-privacy.md">Markdown policy source</a></p>
+</main></body></html>
