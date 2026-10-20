@@ -37,13 +37,12 @@ by a model may be saved locally and returned as conversation context. Other save
 conversations are not automatically uploaded. This release supports online text
 chat; existing local image/audio tasks remain local.
 
-AURA requests only free models and requires OpenRouter's zero-data-retention
-routing and data-collection restrictions. If no eligible endpoint is available,
-the request fails; AURA does not silently select a paid model or relax those
-restrictions. These controls rely on OpenRouter's classification and enforcement
-of provider policies. AURA cannot independently audit or guarantee a provider's
-conduct. Zero retention routing is not a claim that no data is transmitted, no
-request metadata exists, or no transient in-memory caching occurs.
+AURA requests only free models with strict zero price limits ($0 for prompt,
+completion, request, and images). If no free endpoint is available, the request
+fails; AURA does not select paid models or fallbacks. Free models are hosted by
+independent third-party inference providers whose data collection, retention,
+and training policies vary. AURA cannot independently audit or guarantee a
+provider's conduct.
 
 OpenRouter describes prompt/response storage as opt-in through account controls.
 If you enable its content logging or product-use options, those settings apply.
@@ -53,7 +52,6 @@ providers have their own terms and policies. Review these before connecting:
 
 - [OpenRouter privacy policy](https://openrouter.ai/privacy)
 - [OpenRouter data collection](https://openrouter.ai/docs/guides/privacy/data-collection)
-- [Zero Data Retention routing](https://openrouter.ai/docs/guides/features/zdr)
 - [Provider policies](https://openrouter.ai/providers)
 - [OpenRouter terms](https://openrouter.ai/terms)
 
@@ -69,6 +67,16 @@ Android Keystore key and stored in a directory excluded from Android backup.
 Current backup rules also exclude chat history, attachments and Hugging Face
 credential storage from cloud backup and device transfer. Earlier app versions
 may have used different backup rules; this update does not erase earlier backups.
+
+Chat search runs on saved conversations on your device. You can rename chats and
+export their visible text as Markdown to a location you select through Android's
+file picker. Exports do not include image/audio attachments, credentials, or hidden
+reasoning metadata. If you choose a cloud storage provider, that provider receives
+the exported file under its own policies. Exported copies are outside AURA's
+private storage and are not removed when you delete a chat or uninstall AURA.
+
+For long online chats, AURA may omit older turns from a request to leave room for
+the answer. The app indicates when this happens; the full local history remains.
 
 Deleting a chat removes its local saved copy. It does not submit a deletion
 request to OpenRouter, its providers, or a previous backup service. Disconnecting
